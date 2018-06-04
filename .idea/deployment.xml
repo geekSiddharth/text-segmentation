@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData">
+    <serverData>
+      <paths name="vkl_gpu">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/checkpoints/best_model.t7" />
+            <excludedPath path="/checkpoints/model000.t7" />
+            <excludedPath path="/checkpoints/model001.t7" />
+            <excludedPath path="/checkpoints/model002.t7" />
+            <excludedPath path="/checkpoints/model003.t7" />
+            <excludedPath path="/checkpoints/model004.t7" />
+            <excludedPath path="/checkpoints/model005.t7" />
+            <excludedPath path="/checkpoints/model006.t7" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

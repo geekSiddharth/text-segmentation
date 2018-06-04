@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ad6776f0-337c-4a7a-a5ef-c9d83f8f6c8c" name="vkl_gpu" url="http://40.71.222.107">
+        <fileTransfer host="40.71.222.107" port="22" rootFolder="/datadrive/sid/text-segmentation/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

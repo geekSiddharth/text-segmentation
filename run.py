@@ -1,22 +1,22 @@
-import torch
-from torch.utils.data import DataLoader
-from torch.autograd import Variable
-import torch.nn.functional as F
-
-from choiloader import ChoiDataset, collate_fn
-from tqdm import tqdm
-from argparse import ArgumentParser
-from utils import maybe_cuda
-import gensim
-import utils
-from tensorboard_logger import configure, log_value
 import os
 import sys
-from pathlib2 import Path
-from wiki_loader import WikipediaDataSet
-import accuracy
+from argparse import ArgumentParser
+
+import gensim
 import numpy as np
-from termcolor import colored
+import torch
+import torch.nn.functional as F
+from pathlib2 import Path
+from tensorboard_logger import configure, log_value
+from torch.autograd import Variable
+from torch.utils.data import DataLoader
+from tqdm import tqdm
+
+import accuracy
+import utils
+from choiloader import ChoiDataset, collate_fn
+from utils import maybe_cuda
+from wiki_loader import WikipediaDataSet
 
 torch.multiprocessing.set_sharing_strategy('file_system')
 
@@ -246,15 +246,15 @@ def main(args):
                 torch.save(model, f)
 
             val_pk, threshold = validate(model, args, j, dev_dl, logger)
-            if val_pk < best_val_pk:
-                test_pk = test(model, args, j, test_dl, logger, threshold)
-                logger.debug(
-                    colored(
-                        'Current best model from epoch {} with p_k {} and threshold {}'.format(j, test_pk, threshold),
-                        'green'))
-                best_val_pk = val_pk
-                with (checkpoint_path / 'best_model.t7'.format(j)).open('wb') as f:
-                    torch.save(model, f)
+            # if val_pk < best_val_pk:
+            #     test_pk = test(model, args, j, test_dl, logger, threshold)
+            #     logger.debug(
+            #         colored(
+            #             'Current best model from epoch {} with p_k {} and threshold {}'.format(j, test_pk, threshold),
+            #             'green'))
+            #     best_val_pk = val_pk
+            #     with (checkpoint_path / 'best_model.t7'.format(j)).open('wb') as f:
+            #         torch.save(model, f)
 
     else:
         test_dataset = WikipediaDataSet(args.infer, word2vec=word2vec,

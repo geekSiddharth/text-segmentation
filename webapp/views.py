@@ -1,10 +1,11 @@
-from flask import render_template, request, flash, redirect, url_for
-from webapp import app
-from .forms import InputTextForm
-import utils
 import gensim
+from flask import jsonify
+from flask import render_template, request
+
 import evaluate
+import utils
 from text_manipulation import split_sentences
+from webapp import app
 
 if utils.config['test']:
     word2vec = None
@@ -15,7 +16,7 @@ model = evaluate.load_model()
 
 
 def treat_text(raw_text):
-    sentences = split_sentences(raw_text)
+    sentences = split_sentences(raw_text, 1234)
     print(sentences)
 
     cutoffs = evaluate.predict_cutoffs(sentences, model, word2vec)
@@ -27,9 +28,7 @@ def treat_text(raw_text):
             total.append(segment)
             segment = []
 
-    return total 
-
-
+    return total
 
 
 @app.route('/')
@@ -43,3 +42,16 @@ def result():
     segmentation = treat_text(request.form['Text'])
     print(segmentation)
     return render_template('result.html', segmentation=segmentation)
+
+
+@app.route('/get_segments', methods=['POST'])
+def result():
+    data_json = request.get_json(force=True)
+    segmentation = treat_text(data_json['text'])
+    print(segmentation)
+
+    out_dict = {}
+    for segment in range(len(segmentation)):
+        out_dict[segment] = segmentation[segment]
+
+    return jsonify(out_dict)
