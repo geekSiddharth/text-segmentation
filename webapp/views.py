@@ -45,7 +45,7 @@ def result():
 
 
 @app.route('/get_segments', methods=['POST'])
-def result():
+def get_segments():
     data_json = request.get_json(force=True)
     segmentation = treat_text(data_json['text'])
     print(segmentation)
