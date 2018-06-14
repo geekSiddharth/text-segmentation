@@ -1,4 +1,4 @@
-FROM  ufoym/deepo:pytorch-py27
+FROM library/python:2
 
 MAINTAINER Siddharth Yadav "siddharth16268@iiitd.ac.in"
 
